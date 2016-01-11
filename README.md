@@ -25,26 +25,24 @@ JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似
 编写Controller类只需继承BaseController即可，无需任何注解和配置，如下：
 
     public class TestController extends BaseController{
+	    //match:webroot/restful/jsp
 	    public String jsp()
 	    {
 		    return "/test.jsp";
 	    }
+	    //match:webroot/restful/ftl
 	    public String ftl()
 	    {
 		    return "/test.ftl";
 	    }
-	    @URIAlias("blog")
+	    //match:webroot/restful/blog/xxxx
+	    @URIAlias("blog/*")
 	    public Blog getBlog()
 	    {
-		    Blog blog = Blog.me.findById("1","*");
+		    Blog blog = Blog.me.findById(request.getAttribute("$1"),"*");
 		    return blog;
 	    }
     }
-
-通过以下地址即可访问：
-	http://ip:port/webroot/restful/testController/jsp.jhtml
-	http://ip:port/webroot/restful/testController/ftl.jhtml
-	http://ip:port/webroot/restful/testController/blog.jhtml
 
 @URIAlias的注解可用于重命名URI，也可以在Class上使用这个注解。
 	
@@ -96,17 +94,6 @@ JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似
 
 #### <i class="icon-refresh"></i> 验证码插件
 
-都懂得:)
-
 #### <i class="icon-refresh"></i> 上传服务插件
 
-图片上传，文件上传，自动生成缩略图，水印等效果；
-
-#### <i class="icon-refresh"></i> RBAC插件
-都懂得:)
-#### <i class="icon-refresh"></i> 工作流插件
-都懂得:)
-#### <i class="icon-refresh"></i> 全文检索插件
-都懂得:)
-#### <i class="icon-refresh"></i> 代码生成插件
-都懂得:)
+#### 等等,详见：http://nb.idbhost.com/jsptagex
