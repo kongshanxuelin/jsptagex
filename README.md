@@ -98,4 +98,4 @@ JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似
 
 #### <i class="icon-refresh"></i> 上传服务插件
 
-#### 等等,详见：http://jsptagx.sumslack.com
+#### 等等,详见：http://jsptagex.code.sumslack.com
