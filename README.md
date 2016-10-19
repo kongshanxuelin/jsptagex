@@ -23,7 +23,7 @@ JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似
 #### <i class="icon-file"></i> MVC
 
 编写Controller类只需继承BaseController即可，无需任何注解和配置，如下：
-```
+```java
     public class TestController extends BaseController{
 	    //match:webroot/restful/jsp
 	    public String jsp()
@@ -49,20 +49,20 @@ JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似
 #### <i class="icon-folder-open"></i> 数据库操作
 
 支持直接JDBC操作也支持POJO风格的数据库操作，如下：
-```
- 1. 单条提取：Blog blog = Blog.me.findById("a","\*");//\*表示所有字段
- 2. 新增记录：new Blog().set("id","1").set("title","博客标题").add();
- 3. 保存记录：Blog.me.findById("a","1").set("title","修改后的标题").save();
- 4. 删除记录：blog.deleteById("1");
+```java
+  Blog blog = Blog.me.findById("a","\*");//\*表示所有字段,单条提取
+  new Blog().set("id","1").set("title","博客标题").add(); //新增记录
+  Blog.me.findById("a","1").set("title","修改后的标题").save();//保存记录
+  blog.deleteById("1");//删除记录
 ``` 
 > **事务操作** 
-```
+```java
  DbUtils.tx(new ITx(){
-	> @Override
-	> public boolean run(Connection conn) throws Exception{
-		>	  new Blog().set("id","1").set("title","test").add(conn);
-		>    new Log().set("id","1").save(conn);	
-	> }
+	 @Override
+	 public boolean run(Connection conn) throws Exception{
+		  new Blog().set("id","1").set("title","test").add(conn);
+		  new Log().set("id","1").save(conn);	
+	 }
  });
 ```
 
