@@ -1,101 +1,73 @@
-Welcome to JSPTagEx!
-===================
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
-欢迎加入QQ群讨论（群号：431040030）
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-JSPTagEx的初衷在于简化Web开发，用更精简的代码实现一套类似SSH的后台框架，并提供一系列丰富的插件简化Web开发，***更少的依赖，更少的代码，更少的配置***，Enjoy It！
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-----------
+## Description
 
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-基本功能
--------------
-#### <i class="icon-file"></i> Maven Archetype
+## Installation
 
-项目全程使用maven管理，根据不同业务需要拉取不同的maven archetype，目前包括：
-
- 1. 纯Java服务；
- 2. Web服务；
- 3. Socket服务；
-
-一键生成项目框架，按需补充业务代码即可。
-
-#### <i class="icon-file"></i> MVC
-
-编写Controller类只需继承BaseController即可，无需任何注解和配置，如下：
-```java
-    public class TestController extends BaseController{
-	    //match:webroot/restful/jsp
-	    public String jsp()
-	    {
-		    return "/test.jsp";
-	    }
-	    //match:webroot/restful/ftl
-	    public String ftl()
-	    {
-		    return "/test.ftl";
-	    }
-	    //match:webroot/restful/blog/xxxx
-	    @URIAlias("blog/*")
-	    public Blog getBlog()
-	    {
-		    Blog blog = Blog.me.findById(request.getAttribute("$1"),"*");
-		    return blog;
-	    }
-    }
-```
-@URIAlias的注解可用于重命名URI，也可以在Class上使用这个注解。
-	
-#### <i class="icon-folder-open"></i> 数据库操作
-
-支持直接JDBC操作也支持POJO风格的数据库操作，如下：
-```java
-  Blog blog = Blog.me.findById("a","\*");//\*表示所有字段,单条提取
-  new Blog().set("id","1").set("title","博客标题").add(); //新增记录
-  Blog.me.findById("a","1").set("title","修改后的标题").save();//保存记录
-  blog.deleteById("1");//删除记录
-``` 
-> **事务操作** 
-```java
- DbUtils.tx(new ITx(){
-	 @Override
-	 public boolean run(Connection conn) throws Exception{
-		  new Blog().set("id","1").set("title","test").add(conn);
-		  new Log().set("id","1").save(conn);	
-	 }
- });
+```bash
+$ yarn install
 ```
 
-#### <i class="icon-pencil"></i> 数据集
+## Running the app
 
-后台支持三种数据集定义，分别是：SQL，JavaScript和Java类，满足不同所需；
+```bash
+# development
+$ yarn run start
 
- 1. SQL：直接编写SQL语句，类似Mybatis的数据集定义；
- 2. JavaScript：单纯SQL无法满足需求，需要根据条件组装SQL语句时，使用JavaScript语法；
- 3. Java类：数据集的提取来自复杂的业务场景，直接集成AbsDataSetExec抽象类；
+# watch mode
+$ yarn run start:dev
 
-#### <i class="icon-trash"></i> AOP
+# production mode
+$ yarn run start:prod
+```
 
-基于注解，可拦截Controller类方法和全局拦截URL请求；
+## Test
 
-#### <i class="icon-hdd"></i> JSPTag Lib
+```bash
+# unit tests
+$ yarn run test
 
-提供丰富的标签库，使得Web开发更简单，并同时提供freemarker自定义标签；
+# e2e tests
+$ yarn run test:e2e
 
- - 通用标签：choose-when-else标签，repeat循环标签等；
- - 数据集标签：sql,dataset,selectOne等标签；
- - 工具类标签：导出标签，权限判定标签等；
+# test coverage
+$ yarn run test:cov
+```
 
+## Support
 
-插件体系
--------------------
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-#### <i class="icon-refresh"></i> Connector插件
+## Stay in touch
 
-方便的连接sftp，qpid，activeMQ，LDAP等中间件，只需配置下XML并编写一下Listener类即可，无需依赖任何包。
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-#### <i class="icon-refresh"></i> 验证码插件
+## License
 
-#### <i class="icon-refresh"></i> 上传服务插件
-
-#### 等等,详见：http://jsptagex.code.sumslack.com
+Nest is [MIT licensed](LICENSE).
